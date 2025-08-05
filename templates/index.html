@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movie Recommender</h1>
+    <form method="GET" action="/recommend">
+        <input type="text" name="movie" placeholder="Enter a movie title..." required>
+        <input type="submit" value="Recommend">
+    </form>
+
+    {% if recommendations %}
+        <div class="results">
+            <h3>Recommendations for: <em>{{ movie }}</em></h3>
+            <ul>
+                {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% elif error %}
+        <div class="results" style="color: red;">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
